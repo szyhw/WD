@@ -1,6 +1,12 @@
 package cn.edu.tju.execute;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,13 +19,36 @@ import cn.edu.tju.rules.GetAllString;
 import cn.edu.tju.rules.GetAndString;
 import cn.edu.tju.rules.GetOptionalString;
 import cn.edu.tju.rules.GetResults;
+import cn.edu.tju.sparqlresult.ConvertStandardForm;
+import cn.edu.tju.sparqlresult.GetSparqlResults;
 import cn.edu.tju.sparqlresult.SparqlResult;
 import cn.edu.tju.tree.OptTree;
 import cn.edu.tju.tree.TreeNode;
 import cn.edu.tju.where.Where;
 
 public class execute {
-
+	public static  String readToString(String fileName) {
+		String encoding = "ISO-8859-1";
+		File file = new File(fileName);
+		Long filelength = file.length();
+		byte[] filecontent = new byte[filelength.intValue()];
+		try {
+			FileInputStream in = new FileInputStream(file);
+			in.read(filecontent);
+			in.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			return new String(filecontent, encoding);
+		} catch (UnsupportedEncodingException e) {
+			System.err.println("The OS does not support " + encoding);
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		/*
@@ -47,13 +76,22 @@ public class execute {
 		System.out.println();*/
 		//System.out.println(SparqlResult.get_result("\"a  b  c\" \"dd  ee  ff\"@en <gg>"));
 		//System.out.println(Variable.get_variable("?x  dbprop:redirect  <http://dbpedia.org/resource/Mineral_water> .     OPTIONAL       { ?x  rdfs:label  ?label .} "));
-		String query="PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX  dbprop: <http://dbpedia.org/property/>  SELECT  ?x ?label WHERE   { {?x  dbprop:redirect  <http://dbpedia.org/resource/Dungeons_%26_Dragons> .}     OPTIONAL       { ?x  rdfs:label  ?label .}   } ";
-		String s=GetResults.getresults(Where.find_where(query));
+		//String query="PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX  dbprop: <http://dbpedia.org/property/>  SELECT  ?x ?label WHERE   { {?x  dbprop:redirect  <http://dbpedia.org/resource/Dungeons_%26_Dragons> .}     OPTIONAL       { ?x  rdfs:label  ?label .}   } ";
+		//String s=GetResults.getresults(Where.find_where(query));
 		//System.out.println(s);
-		TreeNode Root=OptTree.construcTree(s);
+		//TreeNode Root=OptTree.construcTree(s);
 		//OptTree.postOrder(Root);
-		System.out.println(ConstructQuery.constructquery(query,"?x  dbprop:redirect  <http://dbpedia.org/resource/Dungeons_%26_Dragons> ."));
+		//System.out.println(ConstructQuery.constructquery(query,"?x  dbprop:redirect  <http://dbpedia.org/resource/Dungeons_%26_Dragons> ."));
 		//System.out.println(ConstructQuery.constructquery("PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX  dbprop: <http://dbpedia.org/property/>  SELECT  ?x ?label WHERE   { {?x  dbprop:redirect  <http://dbpedia.org/resource/Dungeons_%26_Dragons> .     OPTIONAL       { ?x  rdfs:label  ?label .}   } ","?x  dbprop:redirect  <http://dbpedia.org/resource/Dungeons_%26_Dragons> . "));
+		//System.out.println(readToString("D:\\test.txt").split("\r\n")[0]);
+		//System.out.println(readToString("D:\\test.txt").split("\r\n")[1]);
+		//System.out.println(readToString("D:\\test.txt").split("\n")[1]);
+		//System.out.println(GetSparqlResults.getsparqlresults("empty result"));
+		ArrayList<ArrayList<String>> ss=GetSparqlResults.getsparqlresults("empty result");
+		ConvertStandardForm.convertstandardform(ss);
+		System.out.println(ss.size());
+		ArrayList<HashSet<String>> test=ConvertStandardForm.convertstandardform(ss);
+		System.out.println(ss.get(0).isEmpty());
 	}
 
 }

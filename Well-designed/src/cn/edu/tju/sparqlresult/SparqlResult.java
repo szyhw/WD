@@ -6,9 +6,10 @@ import cn.edu.tju.rules.Caculate;
 
 public class SparqlResult {
 	public static ArrayList<String> get_result(String result){
+		ArrayList<String> results = new ArrayList<String>();
+		if(!result.contains("empty result")){
 		String[] temp=result.split(" ");
 		int length=result.length();
-		ArrayList<String> results = new ArrayList<String>();
 		for (int i = 0; i < temp.length; i++) {
 			String str=temp[i];
 				if(!str.contains("\"")){
@@ -35,6 +36,11 @@ public class SparqlResult {
 				}
 		}
 		return results;
+		}
+		else{
+			results.clear();
+			return results;
+		}
 	}
 
 }
