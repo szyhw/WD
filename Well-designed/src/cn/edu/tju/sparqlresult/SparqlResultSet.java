@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class SparqlResultSet {
-	public static ArrayList<HashSet<String>> sparqlresultset(ArrayList<ArrayList<String>> results){
-		ArrayList<HashSet<String>> ahs = new ArrayList<HashSet<String>>();
+	public static ArrayList<ArrayList<String>> sparqlresultset(ArrayList<ArrayList<String>> results){
+		ArrayList<ArrayList<String>> ahs = new ArrayList<ArrayList<String>>();
 		if(!results.get(0).isEmpty()){
-			ahs=ConvertStandardForm.convertstandardform(results);
+			ahs=InvertedMatrix.invertedmatrix(results);
 		}
 		else{
 			ahs.clear();

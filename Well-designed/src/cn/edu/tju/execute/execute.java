@@ -19,7 +19,7 @@ import cn.edu.tju.rules.GetAllString;
 import cn.edu.tju.rules.GetAndString;
 import cn.edu.tju.rules.GetOptionalString;
 import cn.edu.tju.rules.GetResults;
-import cn.edu.tju.sparqlresult.ConvertStandardForm;
+import cn.edu.tju.sparqlresult.InvertedMatrix;
 import cn.edu.tju.sparqlresult.GetSparqlResults;
 import cn.edu.tju.sparqlresult.SparqlResult;
 import cn.edu.tju.tree.OptTree;
@@ -87,11 +87,6 @@ public class execute {
 		//System.out.println(readToString("D:\\test.txt").split("\r\n")[1]);
 		//System.out.println(readToString("D:\\test.txt").split("\n")[1]);
 		//System.out.println(GetSparqlResults.getsparqlresults("empty result"));
-		ArrayList<ArrayList<String>> ss=GetSparqlResults.getsparqlresults("empty result");
-		ConvertStandardForm.convertstandardform(ss);
-		System.out.println(ss.size());
-		ArrayList<HashSet<String>> test=ConvertStandardForm.convertstandardform(ss);
-		System.out.println(ss.get(0).isEmpty());
 	}
 
 }

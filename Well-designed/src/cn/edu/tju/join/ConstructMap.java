@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class ConstructMap {
-	public static HashMap<String, HashSet<String>> constructmap(String subquery,ArrayList<HashSet<String>> ahs){
+	public static HashMap<String, ArrayList<String>> constructmap(String subquery,ArrayList<ArrayList<String>> ahs){
 		int start=subquery.indexOf("SELECT ");
 		int end=subquery.indexOf("WHERE", start);
 		String subString=subquery.substring(start, end);
@@ -16,11 +16,11 @@ public class ConstructMap {
 				variables.add(s[i]);
 			}
 		}
-		HashMap<String, HashSet<String>> subresult=new HashMap<String, HashSet<String>>();
+		HashMap<String, ArrayList<String>> subresult=new HashMap<String, ArrayList<String>>();
 		int length=ahs.size();
 		if(length!=variables.size()){
-			HashSet<String> hs=new HashSet<String>();
-			hs.add("[empty result]");
+			ArrayList<String> hs=new ArrayList<String>();
+			hs.clear();
 			for (int i = 0; i < variables.size(); i++) {
 				subresult.put(variables.get(i), hs);
 			}
