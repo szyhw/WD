@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Stack;
 import java.util.regex.Matcher;
@@ -13,6 +14,7 @@ import java.util.regex.Pattern;
 
 import cn.edu.tju.constructsubquery.ConstructQuery;
 import cn.edu.tju.constructsubquery.Variable;
+import cn.edu.tju.join.Matching;
 import cn.edu.tju.prefix.Prefix;
 import cn.edu.tju.rules.ConvertRules;
 import cn.edu.tju.rules.GetAllString;
@@ -87,6 +89,42 @@ public class execute {
 		//System.out.println(readToString("D:\\test.txt").split("\r\n")[1]);
 		//System.out.println(readToString("D:\\test.txt").split("\n")[1]);
 		//System.out.println(GetSparqlResults.getsparqlresults("empty result"));
+		HashMap<String, ArrayList<String>> left=new HashMap<String, ArrayList<String>>();
+		ArrayList<String> a=new ArrayList<String>();
+		a.add("a");
+		a.add("b");
+		a.add("c");
+		a.add("d");
+		left.put("?person",a);
+		ArrayList<String> b=new ArrayList<String>();
+		b.add("jon");
+		b.add("ano");
+		b.add("liz");
+		b.add("mb");
+		left.put("?name", b);
+		//left.put("?person", b);
+		System.out.println(left);
+		HashMap<String, ArrayList<String>> right=new HashMap<String, ArrayList<String>>();
+		ArrayList<String> c=new ArrayList<String>();
+		c.add("a");
+		c.add("b");
+		c.add("d");
+		right.put("?person", c);
+		ArrayList<String> d=new ArrayList<String>();
+		d.add("<joy>");
+		d.add("<jpg>");
+		d.add("<jepg>");
+		right.put("?depiction", d);
+		ArrayList<String> e=new ArrayList<String>();
+		e.add("jon");
+		e.add("mb");
+		e.add("ano");
+		//right.put("?name", e);
+		//Matching.matching(left, right);
+		ArrayList<Integer> position=Matching.GetPosition(left, right);
+		System.out.println(position);
+		System.out.println(Matching.ChangeSequence(c, position));
+		Matching.matching(left, right);
 	}
 
 }
