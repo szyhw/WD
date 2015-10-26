@@ -17,10 +17,6 @@ static TreeNode root = null;
 	}
 	
 	static TreeNode buildTree(String expression){
-		/*
-		 * 去除表达式首部和尾部的多余括号   
-		 * 当出现了括号不匹配时出现异常   抛出
-		 */
 		if(expression.indexOf("{") == 0){
 			for(int i = 0;i < expression.length();i++){
 				if(expression.startsWith("{") == true){
@@ -41,9 +37,9 @@ static TreeNode root = null;
 		TreeNode newNode = new TreeNode();
 		String leftString = new String();
 		String rightString = new String();
-		String stack = new String();             //用于存储括号的栈    当表达式检测完毕后  若栈不为空  这说明括号使用不合法
+		String stack = new String();             
 		if(hasOper(expression) == true){
-			int index = 0;      //记录最先扫描到的不在括号中的加号或减号      必为表达式运算的最后一次操作
+			int index = 0;    
 			for(int i = expre.size()-1;i>=0;i--){
 				if(expre.get(i).equals("}")){
 					stack = stack + expre.get(i);
@@ -97,23 +93,22 @@ static TreeNode root = null;
 		return newNode;
 	}
 	
-	public static void postOrder(TreeNode currNode){
+	public static void postOrder(TreeNode currNode){//后序遍历
 		if(currNode != null){
 			postOrder(currNode.left);
-
 			postOrder(currNode.right);
 			System.out.print(currNode.data+"  ");
 			
 		}
 	}
-	public static void preOrder(TreeNode currNode){
+	public static void preOrder(TreeNode currNode){//先序遍历
 		if(currNode != null){
 			System.out.print(currNode.data+"  ");
 			preOrder(currNode.left);
 			preOrder(currNode.right);
 		}
 	}
-	public static void inOrder(TreeNode currNode){
+	public static void inOrder(TreeNode currNode){//中序遍历
 		if(currNode != null){
 			inOrder(currNode.left);
 			System.out.print(currNode.data+"  ");

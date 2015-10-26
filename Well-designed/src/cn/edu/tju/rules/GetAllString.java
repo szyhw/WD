@@ -11,7 +11,7 @@ public class GetAllString {
 				result=result+s.get(i);
 			}
 			s.clear();
-			System.out.println("getelements:	"+result);
+			//System.out.println("getelements:	"+result);
 			return result;
 	}
 	public static ArrayList<String> getallstring(String query){
@@ -39,7 +39,8 @@ public class GetAllString {
 					string.push(s);
 			}
 		}
-		System.out.println("all.size	"+result.size());
+		//System.out.println("all.size	"+result.size());
+		//System.out.println("all:	"+result);
 		return result;
 	}
 

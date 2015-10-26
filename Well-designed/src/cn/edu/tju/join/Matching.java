@@ -67,12 +67,13 @@ public class Matching {
 		}
 		return right;
 	}
-	public static void matching(HashMap<String, ArrayList<String>> left,HashMap<String, ArrayList<String>> right){
+	public static HashMap<String, ArrayList<String>> matching(HashMap<String, ArrayList<String>> left,HashMap<String, ArrayList<String>> right){
 		ArrayList<Integer> position = GetPosition(left, right);
 		right=FinalRight(right, position);
 		right=DeleteSet(left, right);
 		left.putAll(right);
 		System.out.println(left);
+		return left;
 		
 	}
 
