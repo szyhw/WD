@@ -24,6 +24,7 @@ import cn.edu.tju.rules.GetResults;
 import cn.edu.tju.sparqlresult.InvertedMatrix;
 import cn.edu.tju.sparqlresult.GetSparqlResults;
 import cn.edu.tju.sparqlresult.SparqlResult;
+import cn.edu.tju.tree.AssemblyQuery;
 import cn.edu.tju.tree.OptTree;
 import cn.edu.tju.tree.TreeNode;
 import cn.edu.tju.where.Where;
@@ -40,7 +41,8 @@ public class execute {
 		TreeNode Root=OptTree.construcTree(where);
 		OptTree.postOrder(Root);
 		Stack<HashMap<String, ArrayList<String>>> stack = new Stack<HashMap<String, ArrayList<String>>>();
-		
+		Stack<HashMap<String, ArrayList<String>>> line = AssemblyQuery.postOrder(Root, query, stack);
+		System.out.println(line);
 	}
 
 }
